@@ -1,0 +1,96 @@
+html {
+	font-family: $fontOpenSans, Verdana, Geneva, Tahoma, sans-serif;
+	box-sizing: border-box;
+}
+
+body {
+	overflow-x: hidden;
+}
+
+a,
+button,
+p {
+	font-size: 18px !important;
+	white-space: pre-line;
+}
+
+a {
+	color: inherit;
+	text-decoration: none;
+	outline: none;
+	padding: 3px;
+	border-radius: 10px;
+	border-bottom: 2px solid transparent;
+
+	svg {
+		height: 1.8em !important;
+		padding: 3px;
+	}
+}
+
+/* Highlight on hover and focus */
+button:hover,
+button:focus,
+a:hover,
+a:focus,
+a.router-link-active {
+	border-bottom: 2px solid $secondaryClr !important;
+	color: $secondaryClr !important;
+}
+
+/* Highlight only when focused with keyboard */
+button:focus-visible,
+a:focus-visible {
+	box-shadow: 0 0 0 2px $primaryClr;
+}
+
+button {
+	background: none;
+	border: none;
+	color: inherit;
+	cursor: pointer;
+	font: inherit;
+	outline: none;
+	padding: 3px;
+	border-radius: 5px;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+	display: block;
+}
+
+.app-container {
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+	min-height: 100svh;
+
+	.section-wrapper {
+		position: relative;
+		padding: 30px 0;
+		width: 100%;
+	}
+
+	.container {
+		padding: 0 40px;
+		max-width: 1440px;
+		margin: 0 auto;
+		width: 100%;
+		height: inherit;
+
+		@include breakpoint-max(800) {
+			padding: 0 20px;
+		}
+	}
+
+	.main-content {
+		flex-grow: 1;
+	}
+
+	/* make the footer sticky */
+	the-footer {
+		margin-top: auto;
+	}
+}

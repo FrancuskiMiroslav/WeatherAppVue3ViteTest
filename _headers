@@ -1,0 +1,2 @@
+# Serve WebP images with the correct content type
+*.webp image/webp
