@@ -92,10 +92,13 @@ const actions = {
 	},
 
 	async fetchForecastData({ commit }, location) {
-		const apiKey = import.meta.env.VITE_OPENWEATHERMAP_SECRET_KEY;
-		const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`;
+		if (!location) {
+			return;
+		}
 
 		try {
+			const apiKey = import.meta.env.VITE_OPENWEATHERMAP_SECRET_KEY;
+			const url = `https://api.openweathermap.org/data/2.5/forecast?q=${location}&appid=${apiKey}`;
 			const response = await fetch(url);
 			if (!response.ok) {
 				throw new Error('Failed to fetch forecast data');

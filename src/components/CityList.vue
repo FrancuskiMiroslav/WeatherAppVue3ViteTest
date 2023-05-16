@@ -2,7 +2,9 @@
     <div class="city-list">
         <h1 class="city-list-title">Saved Cities:</h1>
         <ul>
-            <li v-for="search in savedCities" :key="search.location">
+            <li v-for="(search, searchIndex) in savedSearches" :key="search.location">
+                <font-awesome-icon :icon="['fas', 'trash']" class="input-icon delete-search"
+                    @click="deleteSearch(searchIndex)" />
                 <router-link :to="'/weather/' + search.location">
                     <base-button class="button" @click="selectSearch(search)">
                         {{ search.location }}, {{ search.country }}
@@ -16,14 +18,31 @@
 <script>
 export default {
     name: "CityList",
+    data() {
+        return {
+            savedSearches: [],
+        };
+    },
     computed: {
         savedCities() {
             return JSON.parse(localStorage.getItem("savedCities")) || [];
         },
     },
+    mounted() {
+        this.savedSearches = this.savedCities;
+    },
     methods: {
         selectSearch(search) {
             this.$router.push(`/weather/${search.location}`);
+        },
+        deleteSearch(searchIndex) {
+            const savedCities = JSON.parse(localStorage.getItem("savedCities")) || [];
+
+            savedCities.splice(searchIndex, 1);
+
+            localStorage.setItem("savedCities", JSON.stringify(savedCities));
+
+            this.savedSearches = [...savedCities];
         },
     },
 };
@@ -43,9 +62,21 @@ export default {
 
         li {
             display: flex;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             margin: 0.5rem 0;
+            position: relative;
+
+
+            .button {
+                position: relative;
+            }
+
+            .delete-search {
+                cursor: pointer;
+                right: 0;
+                top: 0;
+            }
         }
     }
 }
